@@ -90,4 +90,3 @@ There is now a Haskell implementation as well, which can be four to six times fa
 **Enjoy!**
 
   [blog post]: http://sebastiancelis.com/2009/nov/16/zsh-prompt-git-users/
-  
