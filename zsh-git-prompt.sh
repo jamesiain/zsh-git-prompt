@@ -44,13 +44,13 @@ function update_current_git_vars() {
     unset __CURRENT_GIT_STATUS
 
     if [[ "$GIT_PROMPT_EXECUTABLE" == "python" ]]; then
-        local gitstatus="$__GIT_PROMPT_DIR/gitstatus.py"
-        _GIT_STATUS=`python ${gitstatus} 2>/dev/null`
+        gitstatus="python $__GIT_PROMPT_DIR/gitstatus.py"
     fi
     if [[ "$GIT_PROMPT_EXECUTABLE" == "haskell" ]]; then
-        _GIT_STATUS=`git status --porcelain --branch &> /dev/null | $__GIT_PROMPT_DIR/src/.bin/gitstatus`
+        gitstatus="$__GIT_PROMPT_DIR/src/.bin/gitstatus"
     fi
-     __CURRENT_GIT_STATUS=("${(@s: :)_GIT_STATUS}")
+    _GIT_STATUS=`git status --porcelain --branch &> /dev/null | ${gitstatus}`
+    __CURRENT_GIT_STATUS=("${(@s: :)_GIT_STATUS}")
     GIT_BRANCH=$__CURRENT_GIT_STATUS[1]
     GIT_AHEAD=$__CURRENT_GIT_STATUS[2]
     GIT_BEHIND=$__CURRENT_GIT_STATUS[3]
