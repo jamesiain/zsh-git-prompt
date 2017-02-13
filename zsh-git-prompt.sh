@@ -52,7 +52,7 @@ function update_current_git_vars() {
     _GIT_STATUS=$(git status --porcelain --branch &> /dev/null | ${gitstatus})
     if [ -n "$_GIT_STATUS" ]; then
         _GIT_ROOTDIR=$(git rev-parse --show-toplevel)
-        _GIT_STASHES=$(cat $_GIT_ROOTDIR/.git/refs/stash 2> /dev/null \
+        _GIT_STASHES=$(git stash list 2> /dev/null \
                                                         | wc -l | sed -e's/ //g')
         _GIT_STATUS=$(echo "$_GIT_STATUS $_GIT_STASHES")
     fi
